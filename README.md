@@ -19,8 +19,8 @@ An interactive web app to **visualize and understand text chunking** strategies 
 
 ## 📸 Screenshot
 
-![App Screenshot 1]([assets/screenshot1.png](https://github.com/Akshay9715/Chunk-Visualizer/blob/main/assests/screenshot1.png))
-![App Screenshot 2]([assets/screenshot2.png](https://github.com/Akshay9715/Chunk-Visualizer/blob/main/assests/screenshot2.png))
+![App Screenshot 1](https://github.com/Akshay9715/Chunk-Visualizer/blob/main/assests/screenshot1.png?raw=true)
+![App Screenshot 2](https://github.com/Akshay9715/Chunk-Visualizer/blob/main/assests/screenshot2.png?raw=true)
 
 ---
 
