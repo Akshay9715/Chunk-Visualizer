@@ -36,7 +36,7 @@ An interactive web app to **visualize and understand text chunking** strategies 
 Clone the repository and run:
 
 ```bash
-git clone https://github.com/<your-username>/chunking.git
+git clone https://github.com/Akshay9715/chunking.git
 cd chunking
 ```
 Build the image:
@@ -56,7 +56,7 @@ App will be available at: http://localhost:5000
 📦 Installation (Without Docker)
 
 ```bash
-git clone https://github.com/<your-username>/chunking.git
+git clone https://github.com/Akshay9715/chunking.git
 cd chunking
 python -m venv .venv
 source .venv/bin/activate   # or .venv\Scripts\activate on Windows
