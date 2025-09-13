@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chunk Visualizer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --secondary: #3498db;
+        --accent: #2980b9;
+        --light: #ecf0f1;
+        --dark: #34495e;
+        --success: #27ae60;
+        --warning: #f39c12;
+        --danger: #e74c3c;
+        --text: #2c3e50;
+        --text-light: #5c6b7e;
+        --border: #ddd;
+        --bg: #f8f9fa;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background-color: var(--bg);
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        color: var(--primary);
+        margin-bottom: 0;
+        font-weight: 700;
+        font-size: 2.2rem;
+      }
+
+      .github-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .github-link:hover {
+        background-color: rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .intro {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--text-light);
+        font-size: 1.1em;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 500;
+      }
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 25px;
+        margin-bottom: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--dark);
+      }
+
+      textarea,
+      select,
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      textarea:focus,
+      select:focus,
+      input:focus {
+        outline: none;
+        border-color: var(--secondary);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+      }
+
+      textarea {
+        min-height: 200px;
+        resize: vertical;
+      }
+
+      button {
+        background-color: var(--secondary);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.2s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button:hover {
+        background-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .flex-row {
+        display: flex;
+        gap: 20px;
+      }
+
+      .flex-row > div {
+        flex: 1;
+      }
+
+      .explanation {
+        background-color: var(--light);
+        padding: 25px;
+        border-radius: 8px;
+        margin-top: 30px;
+        border-left: 4px solid var(--secondary);
+      }
+
+      .explanation h2 {
+        color: var(--primary);
+        margin-bottom: 15px;
+        font-size: 1.4em;
+        font-weight: 700;
+      }
+
+      .explanation p {
+        font-weight: 500;
+      }
+
+      .chunk {
+        display: inline-block;
+        padding: 6px 10px;
+        margin: 3px;
+        border-radius: 4px;
+        color: white;
+        font-size: 16px;
+        line-height: 1.4;
+        font-weight: 500;
+      }
+
+      .result-container {
+        margin-top: 30px;
+        padding: 25px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .result-container h2 {
+        color: var(--primary);
+        margin-bottom: 15px;
+        font-weight: 700;
+        font-size: 1.4em;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        color: var(--text-light);
+        font-weight: 600;
+      }
+
+      footer a {
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .flex-row {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .header-container {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-container">
+      <h1>Chunk Visualizer</h1>
+      <a
+        href="https://github.com/Akshay9715"
+        target="_blank"
+        class="github-link"
+      >
+        <i class="fab fa-github"></i> Follow on GitHub
+      </a>
+    </div>
+
+    <p class="intro">
+      This tool helps you visualize how text is split into smaller pieces,
+      called chunks, which are commonly used in natural language processing and
+      retrieval-based AI applications.
+    </p>
+
+    <div class="card">
+      <form action="/" method="post">
+        <div class="form-group">
+          <label for="text">Enter your text:</label>
+          <textarea
+            name="text"
+            id="text"
+            rows="12"
+            placeholder="Paste your text here"
+          >
+{{text}}</textarea
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="splitter">Choose splitter:</label>
+          <select name="splitter" id="splitter">
+            <option value="char">Character Splitter</option>
+            <option value="recursive-js">
+              Recursive Character Splitter - JS
+            </option>
+            <option value="recursive-python">
+              Recursive Character Splitter - Python
+            </option>
+            <option value="recursive-markdown">
+              Recursive Character Splitter - Markdown
+            </option>
+          </select>
+        </div>
+
+        <div class="flex-row">
+          <div class="form-group">
+            <label for="chunk_size">Chunk size:</label>
+            <input
+              type="number"
+              name="chunk_size"
+              id="chunk_size"
+              value="{{chunk_size}}"
+              min="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="chunk_overlap">Chunk overlap:</label>
+            <input
+              type="number"
+              name="chunk_overlap"
+              id="chunk_overlap"
+              value="{{chunk_overlap}}"
+              min="0"
+            />
+          </div>
+        </div>
+
+        <button type="submit">Visualize Chunks</button>
+      </form>
+    </div>
+
+    {% if result %}
+    <div class="result-container">
+      <h2>Visualized Chunks</h2>
+      <div style="margin-top: 15px; line-height: 1.6">{{ result|safe }}</div>
+    </div>
+    {% endif %}
+
+    <div class="explanation">
+      <h2>About Chunking</h2>
+      <p>
+        Chunking is the process of breaking down large text or data into
+        smaller, manageable parts called chunks, so they can be processed
+        efficiently by algorithms, stored in databases, or used with models that
+        have input size limits. There are different types of chunking:
+        character-based chunking, which divides text into fixed-length pieces
+        based on character count (fast but may cut words or sentences
+        awkwardly); word-based chunking, which splits text into chunks of words,
+        maintaining readability but still limited by size; sentence or paragraph
+        chunking, which respects natural language boundaries, making chunks more
+        meaningful but uneven in length; and recursive chunking, which tries to
+        preserve semantic structure by splitting first at larger boundaries
+        (like paragraphs or sections) and, if still too large, recursively
+        subdividing until each piece fits the desired size. This ensures a
+        balance between computational efficiency and semantic coherence.
+      </p>
+    </div>
+
+    <footer>
+      <p>Made with ❤️ by Akshay</p>
+    </footer>
+  </body>
+</html>

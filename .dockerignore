@@ -1,0 +1,13 @@
+# ignore virtual env + common files
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+*.sqlite3
+.git
+.gitignore
+.vscode
+.idea
